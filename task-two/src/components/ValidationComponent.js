@@ -1,7 +1,7 @@
 import React from 'react'
 
 const validation = (props) => {
-    return <p>{props.text}</p>
+    return (<div><p>{props.text}</p></div>)
 }
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const inputItem = (props) => {
-    return <input type="text" onChange={props.change}/>
+    return <input type="text" onChange={props.change} value={props.text}/>
 }
 
 
