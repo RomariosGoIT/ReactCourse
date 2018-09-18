@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import OutputItem from './components/OutputItem';
-import InputItem from './components/InputItem'
 import Validation from './components/ValidationComponent'
 import CharComponent from './components/CharComponent'
 
@@ -34,16 +32,6 @@ class App extends Component {
 
   render() {
 
-    let validation = null;
-
-    if (this.state.userInput >= 5) {
-      validation = <Validation text="Text long enaugh!"/>
-    } else if (this.state.userInput === 0) {
-      validation = null;
-    } else {
-      validation = <Validation text="Text to short!"/>
-    }
-
     let charComp = (
       <div>
         {this.state.text.split('').map((char, index) =>{
@@ -71,10 +59,12 @@ class App extends Component {
           <li>When you click a CharComponent, it should be removed from the entered text.</li>
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
+        <hr/>
+        <h2>My resolution</h2>
         <div className="App-intro">
-          <InputItem change={this.textInputHandle} text={this.state.text}/>
-          <OutputItem text={this.state.userInput}/>
-          {validation}
+          <input type="text" onChange={this.textInputHandle} value={this.state.text}/>
+          <p>Line length: {this.state.userInput}</p>
+          <Validation inputLengh={this.state.userInput}/>
           {charComp}
         </div>        
       </div>
