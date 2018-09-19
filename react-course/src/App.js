@@ -78,19 +78,20 @@ class App extends Component {
     }
 
     if(this.state.person.length <= 1) {
-      classes.push('bold')
+      classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Hi, i'm React App!</h1>
-        <p className={classes.join(' ')}>This is realy working!!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandle}>Toggle Person
-        </button>
-        {persons}        
-      </div>
+        <div className="App">
+          <h1>Hi, i'm React App!</h1>
+          <p className={classes.join(' ')}>This is realy working!!</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandle}>
+            Toggle Person
+          </button>
+          {persons}        
+        </div>
     );
   }
 }
