@@ -45,14 +45,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
 
     let persons = null;
 
@@ -69,7 +61,6 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
     }
     const compiledClasses = [];
 
@@ -86,7 +77,6 @@ class App extends Component {
           <h1>Hi, i'm React App!</h1>
           <p className={compiledClasses.join(' ')}>This is realy working!!</p>
           <button 
-            style={style}
             onClick={this.togglePersonsHandle}>
             Toggle Person
           </button>
