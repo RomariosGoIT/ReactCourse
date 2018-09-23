@@ -1,7 +1,15 @@
 import React from 'react'
+import classes from './Cockpit.css'
 
 const cockpit = (props) => {
+    
     const compiledClasses = [];
+    
+    let btnClass = ' ';
+
+    if (props.showPersons) {
+        btnClass = classes.Red;
+    }
 
     if (props.person.length <= 2) {
       compiledClasses.push(classes.red);
@@ -12,12 +20,12 @@ const cockpit = (props) => {
     }
 
     return(
-        <div>
+        <div className={classes.Cockpit}>
             <h1>Hi, i'm React App!</h1>
             <p className={compiledClasses.join(' ')}>This is realy working!!</p>
             <button 
                 className={btnClass}
-                onClick={this.togglePersonsHandle}>
+                onClick={props.clicked}>
                 Toggle Person
             </button>
         </div>
