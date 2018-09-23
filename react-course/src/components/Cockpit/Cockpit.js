@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './Cockpit.css'
 
 const cockpit = (props) => {
-    
+
     const compiledClasses = [];
     
     let btnClass = ' ';
@@ -21,7 +21,7 @@ const cockpit = (props) => {
 
     return(
         <div className={classes.Cockpit}>
-            <h1>Hi, i'm React App!</h1>
+            <h1>{props.title}</h1>
             <p className={compiledClasses.join(' ')}>This is realy working!!</p>
             <button 
                 className={btnClass}
