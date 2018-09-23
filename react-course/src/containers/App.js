@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
+import withClass from '../hoc/withClasses'
+import Aux from '../hoc/Aux'
 
 class App extends Component {
 
@@ -12,7 +14,8 @@ class App extends Component {
       {id:'vbcnb1',name: 'Jeka', age: 32},
       {id:'jmhjm3',name: 'Kosty', age: 44}
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   }
 
   nameChangHandle = (event, id) => {
@@ -42,7 +45,10 @@ class App extends Component {
 
   togglePersonsHandle = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow})
+    this.setState({
+      showPersons: !doesShow,
+      toggleClicked: this.state.toggleClicked + 1
+      })
   }
 
   render() {
@@ -57,18 +63,18 @@ class App extends Component {
     }
     
     return (
-        <div className={classes.App}>
+        <Aux>
           <Cockpit
-          title={this.props.title} 
-          showPersons={this.state.showPersons} 
-          person={this.state.person} 
-          clicked={this.togglePersonsHandle} />
-          {persons}        
-        </div>
+            title={this.props.title} 
+            showPersons={this.state.showPersons} 
+            person={this.state.person} 
+            clicked={this.togglePersonsHandle} />
+            {persons}        
+        </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
 
 
