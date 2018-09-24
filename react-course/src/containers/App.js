@@ -3,8 +3,9 @@ import classes from './App.css';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 import withClass from '../hoc/withClasses'
-import Aux from '../hoc/Aux'
+import Aux from '../hoc/Auxius'
 
+export const AuthContext = React.createContext(false);
 class App extends Component {
 
   state = {
@@ -15,7 +16,8 @@ class App extends Component {
       {id:'jmhjm3',name: 'Kosty', age: 44}
     ],
     showPersons: false,
-    toggleClicked: 0
+    toggleClicked: 0,
+    authenticated: false
   }
 
   nameChangHandle = (event, id) => {
@@ -54,6 +56,16 @@ class App extends Component {
       })
   }
 
+  loginHandle = () => {
+    this.setState({authenticated: true})
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('[App.js] Inside getDerivedStateFromProps', 
+    nextProps, prevState)
+    return prevState;
+  }
+
   render() {
 
     let persons = null;
@@ -71,8 +83,11 @@ class App extends Component {
             title={this.props.title} 
             showPersons={this.state.showPersons} 
             person={this.state.person} 
-            clicked={this.togglePersonsHandle} />
-            {persons}        
+            clicked={this.togglePersonsHandle}
+            login={this.loginHandle} />
+            <AuthContext.Provider value={this.state.authenticated}> 
+              {persons}
+            </AuthContext.Provider>        
         </Aux>
     );
   }

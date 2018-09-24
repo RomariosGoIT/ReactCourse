@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Cockpit.css' 
-import Aux from '../../hoc/Aux'
+import Aux from '../../hoc/Auxius'
 
 const cockpit = (props) => {
 
@@ -27,6 +27,9 @@ const cockpit = (props) => {
             <button 
                 className={btnClass}
                 onClick={props.clicked}> Toggle Person
+            </button>
+            <button onClick={props.login}>
+                Log in
             </button>
         </Aux>
     );
