@@ -8,7 +8,6 @@ class BurgerIngridient extends Component {
     render() {
 
         let ingridient = null;
-
         switch(this.props.type) {
             case('bread-bottom'):
                 ingridient = <div className={classes.BreadBottom}></div>;
@@ -38,6 +37,7 @@ class BurgerIngridient extends Component {
             default:
                 ingridient = null;
         }
+        
         return ingridient;
     }
     
