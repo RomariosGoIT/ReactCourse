@@ -3,6 +3,7 @@ import classes from './BurgerIngridient.css';
 import PropTypes from 'prop-types';
 
 class BurgerIngridient extends Component {
+   
 
     render() {
 
@@ -45,6 +46,7 @@ class BurgerIngridient extends Component {
 BurgerIngridient.propTypes = {
     type: PropTypes.string.isRequired
 }
+
 
 
 export default BurgerIngridient;
