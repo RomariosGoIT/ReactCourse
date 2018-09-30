@@ -7,19 +7,19 @@ class Modal extends Component {
 
     shouldComponentUpdate (nextProps, nextState) {
 
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     // componentWillUpdate () {
     //     console.log('[Modal] WillUpdate')
     // }
-
+    
     render(){
         return (
             <Aux>
                 <BackDrop show={this.props.show} clicked={this.props.modalClosed}/>
                 <div 
-                    className={classes.Modal}
+                    className={this.props.loader ? classes.Loader : classes.Modal}
                     style={{
                         transform: this.props.show ? 'translateY(0)' : 'translateY(-120vh)',
                         opacity: this.props.show ? '1' : '0'
