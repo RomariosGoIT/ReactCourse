@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Courses from './containers/Courses/Courses';
 import Users from './containers/Users/Users';
-import { Route, BrowserRouter, Switch, Link, Redirect} from 'react-router-dom';
+import { Route, BrowserRouter, Switch, NavLink, Redirect} from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -10,9 +10,9 @@ class App extends Component {
   }
   render () {
     const links = <div>
-      <ul style={{listStyle: 'none'}}>
-        <li><Link to="/courses/">Courses</Link></li>
-        <li><Link to="/users/">Users</Link></li>
+      <ul style={{listStyle: 'none', margin: 'auto', padding: '0'}}>
+        <li style={{margin: '10px', display: 'inline-block'}}><NavLink to="/courses">Courses</NavLink></li>
+        <li style={{margin: '10px', display: 'inline-block'}}><NavLink to="/users">Users</NavLink></li>
       </ul>
     </div>
     return (
