@@ -84,11 +84,8 @@ class ContactData extends Component {
                     ]
                 },
                 value: 'fastes',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                validation: {},
+                valid: false
             }
         },
         formIsValid: false,
