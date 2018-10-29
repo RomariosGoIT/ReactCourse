@@ -28,6 +28,7 @@ const withErrorHandle = (WrappedComponent, axios) => {
             this.setState({error: null})
         }
         render() {
+            console.log(this.reqInterceptors)
             return (
                 <Aux>
                     <Modal 
