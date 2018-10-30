@@ -28,7 +28,6 @@ const withErrorHandle = (WrappedComponent, axios) => {
             this.setState({error: null})
         }
         render() {
-            console.log(this.reqInterceptors)
             return (
                 <Aux>
                     <Modal 
@@ -37,8 +36,7 @@ const withErrorHandle = (WrappedComponent, axios) => {
                     {this.state.error ? this.state.error.message : null}
                     </Modal>
                     <WrappedComponent {...this.props} />
-                </Aux>
-                    
+                </Aux>                    
             );
         }
     }
