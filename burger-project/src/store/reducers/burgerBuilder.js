@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import * as refactor from './refactoring/refactorBurger';
 
 const initialState = {
     ingredients: null,
@@ -6,55 +7,13 @@ const initialState = {
     error: false
 };
 
-const INGRIDIENT_PRICES = {
-    salad: 5,
-    bacon: 15,
-    cheese: 7,
-    meat: 20
-}
-
 const reducer = (state = initialState, action) => {
     switch(action.type) {
 
-        case actionTypes.ADD_INGREDIENTS:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
-                totalPrice: state.totalPrice + INGRIDIENT_PRICES[action.ingredientName]
-            }
-
-        case actionTypes.REMOVE_INGREDIENT:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
-                },
-                totalPrice: state.totalPrice - INGRIDIENT_PRICES[action.ingredientName]
-            }
-        
-        case actionTypes.SET_INGREDIENTS:
-            return {
-                ...state,
-                ingredients: {
-                    salad: action.ingredients.salad,
-                    cheese: action.ingredients.cheese,
-                    meat: action.ingredients.meat,
-                    bacon: action.ingredients.bacon
-                },
-                totalPrice: 0,
-                error: false
-            }
-        
-        case actionTypes.FETCH_INGREDIENTS_FAILED:
-            return {
-                ...state,
-                error: true
-            }
-
+        case actionTypes.ADD_INGREDIENTS: return refactor.addIngredient(state, action);
+        case actionTypes.REMOVE_INGREDIENT: return refactor.removeIngredient(state, action);
+        case actionTypes.SET_INGREDIENTS: return refactor.setIngredient(state, action);
+        case actionTypes.FETCH_INGREDIENTS_FAILED: return refactor.fetchIngredientFailed(state, action);
         default:
             return state
     }
