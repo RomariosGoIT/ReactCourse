@@ -63,7 +63,7 @@ export const fetchOrdersStart = () => {
     }
 };
 
-export const fetchOrders = (orders) => {
+export const fetchOrders = () => {
     return dispatch => {
         dispatch(fetchOrdersStart()); 
         axios.get('/orders.json')
