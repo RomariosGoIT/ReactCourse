@@ -10,25 +10,29 @@ import Aux from '../../../hoc/Auxi/Auxius'
 
 const sideDrawer = (props) => {
     
+    console.log(props.isAuth)
+
     let attachedClasses = [classes.SideDrawer, classes.Close];
 
     if (props.open) {
         attachedClasses = [classes.SideDrawer, classes.Open];
     }
 
-    return(
+    return(        
         <Aux>
-            <BackDrop show={props.open} clicked={props.closed}/>
+            <BackDrop  show={props.open} clicked={props.closed}/>
             <div className={attachedClasses.join(' ')}>
                 <div className={classes.Logo}>
                     <Logo/>
                 </div>           
                 <nav>
-                    <NavItems/>
+                    <NavItems
+                        isAuthenticate={props.isAuth} />
                 </nav>
             </div>
         </Aux>
     );
+    
 };
 
 export default sideDrawer;
