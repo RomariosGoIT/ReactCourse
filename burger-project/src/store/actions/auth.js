@@ -23,10 +23,23 @@ export const authFail = (error) => {
     }
 };
 
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(()=>{
+            dispatch(logout());
+        }, expirationTime * 1000)
+    };
+};
+
 export const auth = (email, password, isSingin) => {
     return dispatch => {
         dispatch(authStart());
-        console.log(isSingin);
         const authData = {
             email: email,
             password: password,
@@ -40,10 +53,10 @@ export const auth = (email, password, isSingin) => {
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data.idToken, response.data.localId));
+            dispatch(checkAuthTimeout(response.data.expiresIn));
         })
         .catch(error=>{
-            console.log(error);
-            dispatch(authFail(error));
+            dispatch(authFail(error.response.data.error));
         })
     }
 }
