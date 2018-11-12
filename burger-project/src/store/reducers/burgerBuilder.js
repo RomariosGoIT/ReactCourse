@@ -4,7 +4,8 @@ import * as refactor from './refactoring/refactorBurger';
 const initialState = {
     ingredients: null,
     totalPrice: 0,
-    error: false
+    error: false,
+    building: false
 };
 
 const reducer = (state = initialState, action) => {
