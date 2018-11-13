@@ -9,9 +9,6 @@ import Aux from '../../../hoc/Auxi/Auxius'
 
 
 const sideDrawer = (props) => {
-    
-    console.log(props.isAuth)
-
     let attachedClasses = [classes.SideDrawer, classes.Close];
 
     if (props.open) {

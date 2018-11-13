@@ -7,7 +7,7 @@ import Input from '../../../components/UI/Input/Input';
 import { connect } from 'react-redux';
 import * as orderActions from '../../../store/actions/index';
 import withErrorHandle from '../../../hoc/withErrorHandle/withErrorHandle';
-import { updateObject } from '../../../shared/utility';
+import { updateObject, checkValidity } from '../../../shared/utility';
  
 class ContactData extends Component {
     state = {
@@ -95,34 +95,7 @@ class ContactData extends Component {
             }
         },
         formIsValid: false
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length >= 5 && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length <= 5 && isValid;
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
+    }    
 
     orderHandler = (event) => {
         event.preventDefault();
@@ -137,8 +110,7 @@ class ContactData extends Component {
             userId: this.props.userId
         }
 
-        this.props.onOrderHandler(order, this.props.token);
-        
+        this.props.onOrderHandler(order, this.props.token);       
         
     }
 
@@ -146,7 +118,7 @@ class ContactData extends Component {
        
         const updatedValue = updateObject(this.state.orderForm[elementId], {
             value: event.target.value,
-            valid: this.checkValidity( event.target.value, this.state.orderForm[elementId].validation),
+            valid: checkValidity( event.target.value, this.state.orderForm[elementId].validation),
             touched: true
         });
 
