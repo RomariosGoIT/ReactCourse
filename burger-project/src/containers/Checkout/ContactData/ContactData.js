@@ -6,8 +6,9 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import { connect } from 'react-redux';
 import * as orderActions from '../../../store/actions/index';
-import withErrorHandle from '../../../hoc/withErrorHandle/withErrorHandle'
-
+import withErrorHandle from '../../../hoc/withErrorHandle/withErrorHandle';
+import { updateObject } from '../../../shared/utility';
+ 
 class ContactData extends Component {
     state = {
         orderForm : {
@@ -47,7 +48,8 @@ class ContactData extends Component {
                 validation: {
                     required: true,
                     maxLength: 5,
-                    minLength: 5
+                    minLength: 5,
+                    isNumeric: true
                 },
                 valid: false,
                 touched: false
@@ -73,6 +75,7 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
+                    isEmail: true,
                     required: true
                 },
                 valid: false,
@@ -108,6 +111,16 @@ class ContactData extends Component {
             isValid = value.length <= 5 && isValid;
         }
 
+        if (rules.isEmail) {
+            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            isValid = pattern.test(value) && isValid
+        }
+
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid
+        }
+
         return isValid;
     }
 
@@ -130,16 +143,17 @@ class ContactData extends Component {
     }
 
     inputChangeHandler = (event, elementId) => {
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        }
-        const updatedValue = {
-            ...updatedOrderForm[elementId]
-        };
-        updatedValue.value = event.target.value;
-        updatedValue.valid = this.checkValidity(updatedValue.value, updatedValue.validation)
-        updatedOrderForm[elementId] = updatedValue;
-        updatedValue.touched = true;
+       
+        const updatedValue = updateObject(this.state.orderForm[elementId], {
+            value: event.target.value,
+            valid: this.checkValidity( event.target.value, this.state.orderForm[elementId].validation),
+            touched: true
+        });
+
+        const updatedOrderForm = updateObject(this.state.orderForm,{
+            [elementId]: updatedValue
+        }); 
+        
         let formIsValid = true;
         for (let validationInentifer in updatedOrderForm) {
             formIsValid = updatedOrderForm[validationInentifer].valid && formIsValid;
