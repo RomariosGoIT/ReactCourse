@@ -30,7 +30,7 @@ export const checkValidity = (value, rules) => {
     }
 
     if (rules.pasMinLength) {
-        isValid = value.length <= rules.pasMinLength && isValid;
+        isValid = value.length >= rules.pasMinLength && isValid;
     }
 
     return isValid;

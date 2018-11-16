@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../../components/UI/Buttons/Button';
-import classes from './ContactData.css';
+// import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import * as orderActions from '../../../store/actions/index';
 import withErrorHandle from '../../../hoc/withErrorHandle/withErrorHandle';
 import { updateObject, checkValidity } from '../../../shared/utility';
+import Aux from '../../../hoc/Auxi/Auxius';
+import Modal from '../../../components/UI/Modal/Modal';
  
 class ContactData extends Component {
     state = {
@@ -94,7 +96,9 @@ class ContactData extends Component {
                 valid: true
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        purchasing: true, 
+        loading: true
     }    
 
     orderHandler = (event) => {
@@ -133,6 +137,10 @@ class ContactData extends Component {
         this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid})
     }
 
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false})
+    }
+
     render () {
         const formElementArray = [];
         for (let key in this.state.orderForm) {
@@ -162,10 +170,16 @@ class ContactData extends Component {
             form = <Spinner/>
         }
         return (
-            <div className={classes.ContactData}>   
-                <h4>Enter your Contact Data</h4>
-                {form}
-            </div>
+            // <div className={classes.ContactData}>   
+            //     <h4>Enter your Contact Data</h4>
+            //     {form}
+            // </div>            
+            <Aux>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler} loader={this.state.loading}>
+                    <h4>Enter your Contact Data</h4>
+                    {form}
+                </Modal>
+            </Aux>
         );
     }
 }

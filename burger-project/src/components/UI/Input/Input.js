@@ -12,7 +12,12 @@ const input = (props) => {
     let validationError = null;
 
     if(props.invalid && props.touched) {
-        validationError = <p className={classes.ValidationError}>Please enter a valid {props.elementConfig.type}!</p>
+        if(props.elementConfig.type === 'password') {            
+            validationError = <p className={classes.ValidationError}>Password should be at least 6 character!</p>
+        } else {
+            validationError = <p className={classes.ValidationError}>Please enter a valid {props.elementConfig.type}!</p>
+        }
+        
     }
 
 
