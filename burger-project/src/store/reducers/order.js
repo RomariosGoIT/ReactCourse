@@ -4,7 +4,8 @@ import * as refactor from './refactoring/refactorOrders';
 const initialState = {
     orders: [],
     loading: false,
-    purchased: false
+    purchased: false,
+    orderSuccess: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +16,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.PURCHASE_BURGER_FAIL: return refactor.purchaseBurgerFail(state, action);
         case actionTypes.FETCH_ORDERS_START: return refactor.fetchOrderStart(state, action);
         case actionTypes.FETCH_ORDERS_SUCCESS: return refactor.fetchOrdersSuccess(state, action);            
-        case actionTypes.FETCH_ORDERS_FAIL: return refactor.fetchOrdersFail(state, action);            
+        case actionTypes.FETCH_ORDERS_FAIL: return refactor.fetchOrdersFail(state, action);
+        case actionTypes.PURCHASE_ORDER_SUCCESS: return refactor.purchaseOrderSuccess(state,action);            
         default:
             return state
     }

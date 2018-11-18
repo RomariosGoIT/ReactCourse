@@ -14,11 +14,14 @@ import axios from '../../axios-orders';
 export class BurgerBuilder extends Component {
 
     state = {
-        purchasing: false
+        purchasing: false,
+        orderSuccess: this.props.orderSuccess
     }
 
     componentDidMount () {
-        this.props.onInitIgredients()
+        console.log(this.state.orderSuccess) 
+        console.log('orderSuccessForm', this.state.orderSuccessForm)       
+        this.props.onInitIgredients();
     }
 
     updatePurchaseState (ingredients) {
@@ -45,7 +48,7 @@ export class BurgerBuilder extends Component {
     }
     
     purchaseCancelHandler = () => {
-        this.setState({purchasing: false})
+        this.setState({purchasing: false, orderSuccess: false})
     }
 
     purchaseContinueHandler = () => {
@@ -86,11 +89,21 @@ export class BurgerBuilder extends Component {
                 totalPrice={this.props.price} />
         }
 
+        let orderSuccessForm = null
+
+        if (this.state.orderSuccess) {
+            orderSuccessForm = (
+                <Modal show={this.state.orderSuccess} modalClosed={this.purchaseCancelHandler}>
+                    <p style={{textAlign: 'center'}}>Thank you for order!</p>
+                </Modal>  )
+        }
+
         return (
             <Aux>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     {orderSummary}
-                </Modal>                
+                </Modal>
+                {orderSuccessForm}                
                 {burger}
             </Aux>
         );
@@ -102,7 +115,8 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
-        isAuthenticated: state.auth.token != null
+        isAuthenticated: state.auth.token != null,
+        orderSuccess: state.order.orderSuccess
     }
 }
 

@@ -22,16 +22,25 @@ export const purchaseBurgerStart = () => {
     }
 }
 
+
+export const purchaseOrderSuccess = () => {
+    return {
+        type: actionTypes.PURCHASE_ORDER_SUCCESS
+    }
+}
+
 export const purchaseBurger = (orderData, token) => {
     return dispatch => {
         dispatch(purchaseBurgerStart());        
         axios.post('/orders.json?auth=' + token, orderData)
         .then(responce => {
             dispatch(purchaseBurgerSuccess(responce.data.name, orderData));
+            
         })
         .catch(error => {
             dispatch(purchaseBurgerFail(error));
         });
+        dispatch(purchaseOrderSuccess());
     };
 };
 
