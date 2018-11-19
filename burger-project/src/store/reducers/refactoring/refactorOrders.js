@@ -39,5 +39,5 @@ export const fetchOrdersFail = (state, action) => {
 };
 
 export const purchaseOrderSuccess = (state, action) => {
-    return updateObject(state, {orderSuccess: true})
+    return updateObject(state, {orderSuccess: action.orderSuccess})
 }

@@ -23,9 +23,10 @@ export const purchaseBurgerStart = () => {
 }
 
 
-export const purchaseOrderSuccess = () => {
+export const purchaseOrderSuccess = (val) => {
     return {
-        type: actionTypes.PURCHASE_ORDER_SUCCESS
+        type: actionTypes.PURCHASE_ORDER_SUCCESS,
+        orderSuccess: val
     }
 }
 
@@ -40,7 +41,7 @@ export const purchaseBurger = (orderData, token) => {
         .catch(error => {
             dispatch(purchaseBurgerFail(error));
         });
-        dispatch(purchaseOrderSuccess());
+        dispatch(purchaseOrderSuccess(true));
     };
 };
 

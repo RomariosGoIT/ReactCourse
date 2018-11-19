@@ -48,6 +48,7 @@ export class BurgerBuilder extends Component {
     }
     
     purchaseCancelHandler = () => {
+        this.props.onOrderSuccess(false)
         this.setState({purchasing: false, orderSuccess: false})
     }
 
@@ -126,7 +127,8 @@ const mapDispatchToProps = dispatch => {
         onIgredientRemoved: (ingName) => dispatch(action.removeIngredient(ingName)),
         onInitIgredients: () => dispatch(action.initIgredients()),
         onInitPurchased: () => dispatch(action.purchaseInit()),
-        onSetAuthRedirectPath: (path) => dispatch(action.setAuthRedirectPath(path))
+        onSetAuthRedirectPath: (path) => dispatch(action.setAuthRedirectPath(path)),
+        onOrderSuccess: (val) => dispatch(action.purchaseOrderSuccess(val))
     }
 }
 
