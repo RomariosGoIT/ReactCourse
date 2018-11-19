@@ -18,9 +18,7 @@ export class BurgerBuilder extends Component {
         orderSuccess: this.props.orderSuccess
     }
 
-    componentDidMount () {
-        console.log(this.state.orderSuccess) 
-        console.log('orderSuccessForm', this.state.orderSuccessForm)       
+    componentDidMount () {   
         this.props.onInitIgredients();
     }
 
