@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import authReducer from './store/reducers/auth';
 import createSagaMiddleware from 'redux-saga';
-import { watchAuth } from './store/sagas/rootSaga';
+import { watchAuth, watchBurgerBuilder, watchOrders } from './store/sagas/rootSaga';
 
 import App from './App';    
 import registerServiceWorker from './registerServiceWorker';
@@ -30,6 +30,8 @@ const store = createStore(rootReducer, composeEnhancers(
 ));
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
+sagaMiddleware.run(watchOrders);
 
 const app = (
     <Provider store={store}>

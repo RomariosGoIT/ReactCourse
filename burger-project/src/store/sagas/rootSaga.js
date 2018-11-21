@@ -10,7 +10,13 @@ export function* watchAuth () {
     yield takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
     yield takeEvery(actionTypes.AUTH_USER, authUserSaga);
     yield takeEvery(actionTypes.AUTH_CHECK_INTITAL_STATE, authCheckStateSaga);
+};
+
+export function* watchBurgerBuilder () {
     yield takeEvery(actionTypes.PURCHASE_INIT_IGREDIENTS, initIgredientsSaga);
+};
+
+export function* watchOrders () {        
     yield takeEvery(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga);
     yield takeEvery(actionTypes.FETCH_ORDERS, fetchOrdersSaga);
-}
+};
